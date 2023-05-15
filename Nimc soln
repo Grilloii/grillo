@@ -1,0 +1,9 @@
+import CloudFlare
+
+cf = CloudFlare.CloudFlare(email='your_email', token='your_api_token')
+
+zone_name = 'grillo.com'
+zone = cf.zones.get(params={'name': zone_name})[0]
+
+dns_record = {'name': 'grillo.com', 'type': 'CNAME', 'content': 'your_cdn_domain'}
+cf.zones.dns_records.post(zone['id'], data=dns_record)
